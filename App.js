@@ -14,11 +14,15 @@ import {
   View,
 } from 'react-native';
 import AppNavContainer from './src/navigations';
+import { Provider } from 'react-redux';
+import {store} from './src/store';
 
 const App = () => {
 
   return (
-    <AppNavContainer></AppNavContainer>
+    <Provider store={store}>
+      <AppNavContainer></AppNavContainer>
+    </Provider>
   );
 };
 

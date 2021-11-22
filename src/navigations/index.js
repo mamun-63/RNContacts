@@ -3,9 +3,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerNavigator from './DrawerNavigator';
 import AuthNavigator from './AuthNavigator';
+import { selectIsLoggedIn } from '../store/auth/slice';
+import { useSelector } from 'react-redux';
 
 const AppNavContainer = () => {
-  const isLoggedIn = false
+  const isLoggedIn = useSelector(selectIsLoggedIn)
 
   return (
     <NavigationContainer>
