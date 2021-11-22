@@ -1,11 +1,12 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import Container from '../../components/common/Container'
 
 const Login = () => {
   return (
-    <View>
+    <Container style={{padding: 10}}>
       <Text>Login</Text>
-    </View>
+    </Container>
   )
 }
 
