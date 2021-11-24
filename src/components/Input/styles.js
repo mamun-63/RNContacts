@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12
   },  
   textInput: {
-    flex: 1
+    flex: 1,
+    width: '100%'
   },
   error: {
     color: colors.danger,
