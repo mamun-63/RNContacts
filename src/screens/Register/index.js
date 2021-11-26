@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import RegisterComponent from '../../components/Signup'
 import { API_ENDPOINT } from "@env"
+import axiosInstance from '../../helpers/axiosInstance'
 
 const Register = () => {
   const [form, setForm] = useState({})
@@ -9,6 +10,12 @@ const Register = () => {
 
   console.log('dev ', __DEV__)
   console.log('url ', API_ENDPOINT)
+
+  useEffect(() => {
+    axiosInstance.get('/contacts').catch(error => {
+      console.log('error', error.response)
+    })
+  }, [])
 
   const onChange = ({ name, value }) => {
     setForm({...form, [name]: value })
