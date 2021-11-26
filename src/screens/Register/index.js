@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import RegisterComponent from '../../components/Signup'
+import { API_ENDPOINT } from "@env"
 
 const Register = () => {
   const [form, setForm] = useState({})
   const [errors, setErrors] = useState({})
+
+  console.log('dev ', __DEV__)
+  console.log('url ', API_ENDPOINT)
 
   const onChange = ({ name, value }) => {
     setForm({...form, [name]: value })
