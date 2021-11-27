@@ -1,14 +1,15 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../../components/Button/Index';
 import Container from '../../components/common/Container';
 import Input from '../../components/Input/Index';
 import Styles from './styles';
-import { REGISTER } from '../../constants/routeNames';
+import {REGISTER} from '../../constants/routeNames';
+import Message from '../Message/Index';
 
 const index = () => {
-  const {navigate} = useNavigation()
+  const {navigate} = useNavigation();
 
   return (
     <Container>
@@ -19,6 +20,19 @@ const index = () => {
       <View>
         <Text style={Styles.title}>Welcome to RNContacts</Text>
         <Text style={Styles.subTitle}>Please login here</Text>
+
+        <Message
+          onDismiss={() => {}}
+          retry
+          retryFn={() => {
+            console.log('retry');
+          }}
+          primary
+          message="invalid credentials"
+        />
+        <Message onDismiss={() => {}} info message="invalid credentials" />
+        <Message onDismiss={() => {}} danger message="invalid credentials" />
+        <Message onDismiss={() => {}} success message="invalid credentials" />
 
         <View style={Styles.form}>
           <Input
@@ -43,7 +57,6 @@ const index = () => {
               <Text style={Styles.linkBtn}>Register</Text>
             </TouchableOpacity>
           </View>
-
         </View>
       </View>
     </Container>
