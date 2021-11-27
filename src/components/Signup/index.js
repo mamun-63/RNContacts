@@ -7,7 +7,7 @@ import Input from '../Input/Index';
 import Styles from './styles';
 import { LOGIN } from '../../constants/routeNames';
 
-const RegisterComponent = ({ errors, form, onChange, onSubmit }) => {
+const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit }) => {
   const {navigate} = useNavigation()
 
   return (
@@ -21,11 +21,14 @@ const RegisterComponent = ({ errors, form, onChange, onSubmit }) => {
         <Text style={Styles.subTitle}>Create a free account</Text>
 
         <View style={Styles.form}>
+          
+          {/* {  error && <Text>{error}</Text>} */}
+
           <Input
             label="Username"
             placeholder="Enter Username"
             iconPosition="right"
-            error={errors.userName}
+            error={errors.userName || error?.username?.[0]}
             onChangeText={(value) => {
               onChange({name: 'userName', value})
             }}
@@ -34,7 +37,7 @@ const RegisterComponent = ({ errors, form, onChange, onSubmit }) => {
             label="First name"
             placeholder="Enter First name"
             iconPosition="right"
-            error={errors.firstName}
+            error={errors.firstName || error?.first_name?.[0]}
             onChangeText={(value) => {
               onChange({name: 'firstName', value})
             }}
@@ -43,7 +46,7 @@ const RegisterComponent = ({ errors, form, onChange, onSubmit }) => {
             label="Last name"
             placeholder="Enter Last name"
             iconPosition="right"
-            error={errors.lastName}
+            error={errors.lastName || error?.last_name?.[0]}
             onChangeText={(value) => {
               onChange({name: 'lastName', value})
             }}
@@ -52,7 +55,7 @@ const RegisterComponent = ({ errors, form, onChange, onSubmit }) => {
             label="Email"
             placeholder="Enter Email"
             iconPosition="right"
-            error={errors.email}
+            error={errors.email || error?.email?.[0]}
             onChangeText={(value) => {
               onChange({name: 'email', value})
             }}
@@ -63,13 +66,13 @@ const RegisterComponent = ({ errors, form, onChange, onSubmit }) => {
             secureTextEntry={true}
             icon={<Text>Show</Text>}
             iconPosition="right"
-            error={errors.password}
+            error={errors.password || error?.password?.[0]}
             onChangeText={(value) => {
               onChange({name: 'password', value})
             }}
           />
 
-          <CustomButton onPress={onSubmit} title="Submit" primary />
+          <CustomButton loading={loading} disabled={loading} onPress={onSubmit} title="Submit" primary />
 
           <View style={Styles.createSection}>
             <Text style={Styles.infoText}>Already have an account?</Text>

@@ -1,23 +1,44 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import RegisterService from './service'
+
+export const register = createAsyncThunk('auth/register', RegisterService.register)
 
 const initialState = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  status: null,
+  user: null,
+  error: null
 }
 
-export const authSlice = createSlice({
+export const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = action.payload
     },
+    resetUser: (state, action) => {
+      state.user = action.payload
+      state.error = action.payload
+    },
+  },
+  extraReducers: {
+    // register
+    [register.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [register.fulfilled]: (state, action) => {
+      console.log(action)
+      state.status = "success";
+      state.user = action.payload
+     },
+    [register.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.payload ? action.payload : 'Something went wrong, try again.'
+    },
   },
 })
 
-// Action creators are generated for each case reducer function
-export const { setIsLoggedIn } = authSlice.actions
+export const { setIsLoggedIn, resetUser } = slice.actions
 
-// Selectors (to select the mutated state from the component)
-export const selectIsLoggedIn = (state) => state.auth.isLoggedIn
-
-export default authSlice.reducer
+export default slice.reducer

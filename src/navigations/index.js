@@ -7,7 +7,7 @@ import { selectIsLoggedIn } from '../store/auth/slice';
 import { useSelector } from 'react-redux';
 
 const AppNavContainer = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
   return (
     <NavigationContainer>
