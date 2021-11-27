@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import RegisterService from './service'
+import AuthService from './service'
 
-export const register = createAsyncThunk('auth/register', RegisterService.register)
+export const register = createAsyncThunk('auth/register', AuthService.register)
+export const login = createAsyncThunk('auth/login', AuthService.login)
 
 const initialState = {
   isLoggedIn: false,
   status: null,
+  error: null,
   user: null,
-  error: null
 }
 
 export const slice = createSlice({
@@ -35,6 +36,21 @@ export const slice = createSlice({
     [register.rejected]: (state, action) => {
       state.status = "failed";
       state.error = action.payload ? action.payload : 'Something went wrong, try again.'
+    },
+
+    // login
+    [login.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [login.fulfilled]: (state, action) => {
+      console.log(action)
+      state.status = "success";
+      state.user = action.payload
+      state.isLoggedIn = true
+     },
+    [login.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.payload 
     },
   },
 })

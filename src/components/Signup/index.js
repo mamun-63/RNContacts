@@ -1,14 +1,29 @@
 import React from 'react';
-import {Button, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../Button/Index';
 import Container from '../common/Container';
 import Input from '../Input/Index';
 import Styles from './styles';
-import { LOGIN } from '../../constants/routeNames';
+import {LOGIN} from '../../constants/routeNames';
+import Message from '../Message/Index';
 
-const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit }) => {
-  const {navigate} = useNavigation()
+const RegisterComponent = ({
+  errors,
+  error,
+  loading,
+  form,
+  onChange,
+  onSubmit,
+}) => {
+  const {navigate} = useNavigation();
 
   return (
     <Container>
@@ -21,16 +36,24 @@ const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit })
         <Text style={Styles.subTitle}>Create a free account</Text>
 
         <View style={Styles.form}>
-          
-          {/* {  error && <Text>{error}</Text>} */}
+          {error && typeof error === 'string' && (
+            <Message
+              retry
+              retryFn={() => {
+                console.log('retry');
+              }}
+              danger
+              message={error}
+            />
+          )}
 
           <Input
             label="Username"
             placeholder="Enter Username"
             iconPosition="right"
             error={errors.userName || error?.username?.[0]}
-            onChangeText={(value) => {
-              onChange({name: 'userName', value})
+            onChangeText={value => {
+              onChange({name: 'userName', value});
             }}
           />
           <Input
@@ -38,8 +61,8 @@ const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit })
             placeholder="Enter First name"
             iconPosition="right"
             error={errors.firstName || error?.first_name?.[0]}
-            onChangeText={(value) => {
-              onChange({name: 'firstName', value})
+            onChangeText={value => {
+              onChange({name: 'firstName', value});
             }}
           />
           <Input
@@ -47,8 +70,8 @@ const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit })
             placeholder="Enter Last name"
             iconPosition="right"
             error={errors.lastName || error?.last_name?.[0]}
-            onChangeText={(value) => {
-              onChange({name: 'lastName', value})
+            onChangeText={value => {
+              onChange({name: 'lastName', value});
             }}
           />
           <Input
@@ -56,8 +79,8 @@ const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit })
             placeholder="Enter Email"
             iconPosition="right"
             error={errors.email || error?.email?.[0]}
-            onChangeText={(value) => {
-              onChange({name: 'email', value})
+            onChangeText={value => {
+              onChange({name: 'email', value});
             }}
           />
           <Input
@@ -67,12 +90,18 @@ const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit })
             icon={<Text>Show</Text>}
             iconPosition="right"
             error={errors.password || error?.password?.[0]}
-            onChangeText={(value) => {
-              onChange({name: 'password', value})
+            onChangeText={value => {
+              onChange({name: 'password', value});
             }}
           />
 
-          <CustomButton loading={loading} disabled={loading} onPress={onSubmit} title="Submit" primary />
+          <CustomButton
+            loading={loading}
+            disabled={loading}
+            onPress={onSubmit}
+            title="Submit"
+            primary
+          />
 
           <View style={Styles.createSection}>
             <Text style={Styles.infoText}>Already have an account?</Text>
@@ -80,7 +109,6 @@ const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit })
               <Text style={Styles.linkBtn}>Login</Text>
             </TouchableOpacity>
           </View>
-
         </View>
       </View>
     </Container>

@@ -89,8 +89,12 @@ const Register = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      if (user || error) {
-        dispatch(resetUser(null))
+      // when screen on focus
+      return () => {
+        // when screen leaving
+        if (user || error) {
+          dispatch(resetUser(null))
+        }
       }
     }, [user, error])
   );

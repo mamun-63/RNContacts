@@ -17,4 +17,19 @@ const register = async (formData, { rejectWithValue }) => {
   }
 }
 
-export default { register }
+const login = async (formData, { rejectWithValue }) => {
+  const { userName, password } = formData
+  const payload = {
+    username: userName,
+    password
+  }
+  try {
+    const response = await axios.post('/auth/login', payload)
+    console.log('success')
+    return response.data
+  } catch (error) {
+    return rejectWithValue(error.response.data)
+  }
+}
+
+export default { register, login }

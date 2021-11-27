@@ -8,7 +8,7 @@ import Styles from './styles';
 import {REGISTER} from '../../constants/routeNames';
 import Message from '../Message/Index';
 
-const index = () => {
+const index = ({error, loading, form, onChange, onSubmit}) => {
   const {navigate} = useNavigation();
 
   return (
@@ -21,25 +21,24 @@ const index = () => {
         <Text style={Styles.title}>Welcome to RNContacts</Text>
         <Text style={Styles.subTitle}>Please login here</Text>
 
-        <Message
-          onDismiss={() => {}}
-          retry
-          retryFn={() => {
-            console.log('retry');
-          }}
-          primary
-          message="invalid credentials"
-        />
-        <Message onDismiss={() => {}} info message="invalid credentials" />
-        <Message onDismiss={() => {}} danger message="invalid credentials" />
-        <Message onDismiss={() => {}} success message="invalid credentials" />
-
         <View style={Styles.form}>
+          {error && (
+            <Message
+              onDismiss={() => {}}
+              retry
+              retryFn={onSubmit}
+              danger
+              message="invalid credentials"
+            />
+          )}
+
           <Input
             label="Username"
             placeholder="Enter Username"
             iconPosition="right"
-            // error={'This field is required'}
+            onChangeText={value => {
+              onChange({name: 'userName', value});
+            }}
           />
           <Input
             label="Password"
@@ -47,9 +46,18 @@ const index = () => {
             secureTextEntry={true}
             icon={<Text>Show</Text>}
             iconPosition="right"
+            onChangeText={value => {
+              onChange({name: 'password', value});
+            }}
           />
 
-          <CustomButton title="Submit" primary />
+          <CustomButton
+            loading={loading}
+            disabled={loading}
+            onPress={onSubmit}
+            title="Submit"
+            primary
+          />
 
           <View style={Styles.createSection}>
             <Text style={Styles.infoText}>Need a new account?</Text>

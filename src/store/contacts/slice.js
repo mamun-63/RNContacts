@@ -4,7 +4,7 @@ const initialState = {
   location: null,
 }
 
-export const authSlice = createSlice({
+export const slice = createSlice({
   name: 'contacts',
   initialState,
   reducers: {
@@ -14,6 +14,6 @@ export const authSlice = createSlice({
   },
 })
 
-export const { setLocation } = authSlice.actions
+export const { setLocation } = slice.actions
 
-export default authSlice.reducer
+export default slice.reducer
