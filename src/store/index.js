@@ -1,11 +1,32 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+
 import authReducer from './auth/slice'
 import contactsReducer from './contacts/slice'
 
-export const store = configureStore({
-  // pull that navigation (reducer) slice and connect to store
-  reducer: {
-    auth: authReducer,
-    contacts: contactsReducer
-  },
+const rootReducer = combineReducers({
+  auth: authReducer,
+  contacts: contactsReducer
 })
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+})
+
+export const persistor = persistStore(store);
+
+export default store;

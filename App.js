@@ -7,21 +7,20 @@
  */
 import 'react-native-gesture-handler';
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import AppNavContainer from './src/navigations';
-import { Provider } from 'react-redux';
-import {store} from './src/store';
+import {Provider} from 'react-redux';
+import store, {persistor} from './src/store';
+
+// REDUX-PERSIST
+import {PersistGate} from 'redux-persist/integration/react';
 
 const App = () => {
-
   return (
     <Provider store={store}>
-      <AppNavContainer></AppNavContainer>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppNavContainer></AppNavContainer>
+      </PersistGate>
     </Provider>
   );
 };

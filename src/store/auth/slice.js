@@ -1,8 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import AuthService from './service'
+import { usePersistor } from '../utils'
 
 export const register = createAsyncThunk('auth/register', AuthService.register)
 export const login = createAsyncThunk('auth/login', AuthService.login)
+
+const name = 'auth';
 
 const initialState = {
   isLoggedIn: false,
@@ -11,14 +14,17 @@ const initialState = {
   user: null,
 }
 
+const persistedFields = ['user']
+
 export const slice = createSlice({
-  name: 'auth',
+  name,
   initialState,
   reducers: {
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = action.payload
     },
     resetUser: (state, action) => {
+      console.log('setUser', action.payload)
       state.user = action.payload
       state.error = action.payload
     },
@@ -57,4 +63,8 @@ export const slice = createSlice({
 
 export const { setIsLoggedIn, resetUser } = slice.actions
 
-export default slice.reducer
+export default usePersistor({
+  reducer: slice.reducer,
+  name,
+  whitelist: persistedFields
+})

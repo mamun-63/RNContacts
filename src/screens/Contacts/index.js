@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Contacts = () => {
+  const getUser = async () => {
+    const user = await AsyncStorage.getItem('user')
+    console.log('user > ', user, 'isLoggedIn', isLoggedIn)
+  }
+
+  useEffect(() => {
+    getUser ()
+  },[])
+
   return (
     <View>
       <Text>Contacts</Text>
