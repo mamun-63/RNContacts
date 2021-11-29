@@ -19,12 +19,12 @@ const AppNavContainer = () => {
       setIsAuthenticated(false)
       setAuthLoaded(true)
     }
-  }, [user, isLoggedIn])
+  }, [isLoggedIn])
 
   return (
     <>
       { authLoaded ? <NavigationContainer>
-        {isLoggedIn || isAuthenticated ? <DrawerNavigator /> : <AuthNavigator />}
+        {isAuthenticated ? <DrawerNavigator /> : <AuthNavigator />}
       </NavigationContainer> : <ActivityIndicator />}
     </>
   );

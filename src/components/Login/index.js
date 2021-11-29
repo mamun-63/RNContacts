@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import CustomButton from '../../components/Button/Index';
 import Container from '../../components/common/Container';
 import Input from '../../components/Input/Index';
 import Styles from './styles';
-import {REGISTER} from '../../constants/routeNames';
+import { REGISTER } from '../../constants/routeNames';
 import Message from '../Message/Index';
 
-const index = ({error, loading, form, onChange, onSubmit}) => {
-  const {navigate} = useNavigation();
+const index = ({ error, loading, form, justSignedup, onChange, onSubmit }) => {
+  const { navigate } = useNavigation();
   const [isSecureEntry, setIsSecureEntry] = useState(true)
 
   return (
@@ -23,9 +23,14 @@ const index = ({error, loading, form, onChange, onSubmit}) => {
         <Text style={Styles.subTitle}>Please login here</Text>
 
         <View style={Styles.form}>
+          {justSignedup && <Message
+            onDismiss={() => { }}
+            success
+            message="Account created successfully"
+          />}
           {error && (
             <Message
-              onDismiss={() => {}}
+              onDismiss={() => { }}
               retry
               retryFn={onSubmit}
               danger
@@ -36,9 +41,10 @@ const index = ({error, loading, form, onChange, onSubmit}) => {
           <Input
             label="Username"
             placeholder="Enter Username"
+            value={form.userName || null}
             iconPosition="right"
             onChangeText={value => {
-              onChange({name: 'userName', value});
+              onChange({ name: 'userName', value });
             }}
           />
           <Input
@@ -48,11 +54,11 @@ const index = ({error, loading, form, onChange, onSubmit}) => {
             icon={<TouchableOpacity onPress={() => {
               setIsSecureEntry(prev => !prev)
             }}>
-              <Text>{isSecureEntry ? 'Show' : 'Hide' }</Text>
+              <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
             </TouchableOpacity>}
             iconPosition="right"
             onChangeText={value => {
-              onChange({name: 'password', value});
+              onChange({ name: 'password', value });
             }}
           />
 

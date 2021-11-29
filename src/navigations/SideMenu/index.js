@@ -3,6 +3,7 @@ import { Image, Alert, TouchableOpacity, SafeAreaView, StyleSheet, Text, View } 
 import Container from '../../components/common/Container';
 import { SETTINGS } from '../../constants/routeNames';
 import styles from './styles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const SideMenu = ({navigation, logout}) => {
   const handleLogout = () => {
@@ -14,8 +15,8 @@ const SideMenu = ({navigation, logout}) => {
   }
 
   const menuItems = [
-    { icon: <Text>icon</Text>, name: 'Settings', onPress: () => navigation.navigate(SETTINGS) },
-    { icon: <Text>icon</Text>, name: 'Logout', onPress: handleLogout },
+    { icon: <Icon size={17} name='settings' />, name: 'Settings', onPress: () => navigation.navigate(SETTINGS) },
+    { icon: <Icon size={17} name='logout' />, name: 'Logout', onPress: handleLogout },
   ];
 
   return (

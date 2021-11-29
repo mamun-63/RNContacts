@@ -83,7 +83,7 @@ const Register = () => {
   useEffect(() => {
     if (user) {
       console.log('not null')
-      navigate(LOGIN)
+      navigate(LOGIN, {data: user})
     }
   }, [user])
 
