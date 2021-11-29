@@ -24,7 +24,6 @@ export const slice = createSlice({
       state.isLoggedIn = action.payload
     },
     resetUser: (state, action) => {
-      console.log('setUser', action.payload)
       state.user = action.payload
       state.error = action.payload
     },
@@ -35,7 +34,6 @@ export const slice = createSlice({
       state.status = "loading";
     },
     [register.fulfilled]: (state, action) => {
-      console.log(action)
       state.status = "success";
       state.user = action.payload
      },
@@ -49,7 +47,6 @@ export const slice = createSlice({
       state.status = "loading";
     },
     [login.fulfilled]: (state, action) => {
-      console.log(action)
       state.status = "success";
       state.user = action.payload
       state.isLoggedIn = true
