@@ -19,7 +19,7 @@ const AppNavContainer = () => {
       setIsAuthenticated(false)
       setAuthLoaded(true)
     }
-  }, [])
+  }, [user, isLoggedIn])
 
   return (
     <>

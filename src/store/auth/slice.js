@@ -26,6 +26,7 @@ export const slice = createSlice({
     resetUser: (state, action) => {
       state.user = action.payload
       state.error = action.payload
+      state.isLoggedIn = false
     },
   },
   extraReducers: {
