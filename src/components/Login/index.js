@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../../components/Button/Index';
@@ -10,6 +10,7 @@ import Message from '../Message/Index';
 
 const index = ({error, loading, form, onChange, onSubmit}) => {
   const {navigate} = useNavigation();
+  const [isSecureEntry, setIsSecureEntry] = useState(true)
 
   return (
     <Container>
@@ -43,8 +44,12 @@ const index = ({error, loading, form, onChange, onSubmit}) => {
           <Input
             label="Password"
             placeholder="Enter Password"
-            secureTextEntry={true}
-            icon={<Text>Show</Text>}
+            secureTextEntry={isSecureEntry}
+            icon={<TouchableOpacity onPress={() => {
+              setIsSecureEntry(prev => !prev)
+            }}>
+              <Text>{isSecureEntry ? 'Show' : 'Hide' }</Text>
+            </TouchableOpacity>}
             iconPosition="right"
             onChangeText={value => {
               onChange({name: 'password', value});

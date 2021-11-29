@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Image,
@@ -24,6 +24,7 @@ const RegisterComponent = ({
   onSubmit,
 }) => {
   const {navigate} = useNavigation();
+  const [isSecureEntry, setIsSecureEntry] = useState(true)
 
   return (
     <Container>
@@ -86,8 +87,12 @@ const RegisterComponent = ({
           <Input
             label="Password"
             placeholder="Enter Password"
-            secureTextEntry={true}
-            icon={<Text>Show</Text>}
+            secureTextEntry={isSecureEntry}
+            icon={<TouchableOpacity onPress={() => {
+              setIsSecureEntry(prev => !prev)
+            }}>
+              <Text>{isSecureEntry ? 'Show' : 'Hide' }</Text>
+            </TouchableOpacity>}
             iconPosition="right"
             error={errors.password || error?.password?.[0]}
             onChangeText={value => {
