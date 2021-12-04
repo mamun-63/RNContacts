@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import CustomButton from '../../components/Button/Index';
-import Container from '../../components/common/Container';
-import Input from '../../components/Input/Index';
+import CustomButton from '../common/Button/Index';
+import Container from '../common/Container';
+import Input from '../common/Input/Index';
 import Styles from './styles';
 import { REGISTER } from '../../constants/routeNames';
-import Message from '../Message/Index';
+import Message from '../common/Message/Index';
 
 const index = ({ error, loading, form, justSignedup, onChange, onSubmit }) => {
   const { navigate } = useNavigation();

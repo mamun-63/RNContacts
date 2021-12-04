@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ActivityIndicator, TouchableOpacity, Text, View} from 'react-native';
-import colors from '../../assets/theme/colors';
+import colors from '../../../assets/theme/colors';
 import styles from './styles';
 
 const Message = ({

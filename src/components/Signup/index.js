@@ -8,12 +8,12 @@ import {
   View,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import CustomButton from '../Button/Index';
+import CustomButton from '../common/Button/Index';
 import Container from '../common/Container';
-import Input from '../Input/Index';
+import Input from '../common/Input/Index';
 import Styles from './styles';
 import {LOGIN} from '../../constants/routeNames';
-import Message from '../Message/Index';
+import Message from '../common/Message/Index';
 
 const RegisterComponent = ({
   errors,
