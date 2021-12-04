@@ -15,6 +15,9 @@ import store, {persistor} from './src/store';
 // REDUX-PERSIST
 import {PersistGate} from 'redux-persist/integration/react';
 
+import {LogBox } from 'react-native'
+LogBox.ignoreLogs(['Reanimated 2'])
+
 const App = () => {
   return (
     <Provider store={store}>

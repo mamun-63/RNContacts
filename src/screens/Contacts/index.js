@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Icon from '../../components/common/Icon'
+import ContactsComponent from '../../components/ContactsComponent'
 
 const Contacts = () => {
   const { setOptions, toggleDrawer } = useNavigation()
@@ -17,11 +18,7 @@ const Contacts = () => {
     })
   }, [])
 
-  return (
-    <View>
-      <Text>Contacts</Text>
-    </View>
-  )
+  return <ContactsComponent />  
 }
 
 export default Contacts
